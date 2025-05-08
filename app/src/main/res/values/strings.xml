@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ColorTool</string>
+    <string name="apk_prompt">直接在微信中打开接收到的 APK 即可</string>
+    <string name="show_in_launcher">显示 Launcher 图标</string>
+    <string name="hide_in_launcher">隐藏 Launcher 图标</string>
+    <string name="set_success">设置成功，因机型差异可能会稍后生效</string>
+    <string name="storage_permission_denied_tip">在低版本上需要存储权限才能正常使用</string>
+    <string name="usage_title">使用方式</string>
+    <string name="usage_desc">在LSPosed中勾选，并授予root权限即可</string>
+    <string name="hide_icon_desc">在启动器中隐藏本应用的图标</string>
+    <string name="pref_key_hide_icon">hide_launcher_icon</string>
+    <string name="hide_icon_title">移除安装频繁弹窗</string>
+    <string name="remove_risk_check">移除安装前风险监测</string>
+    <string name="file_browser">浏览文件</string>
+    <string name="file_browser_desc">浏览设备上的 APK.1 文件，长按重新选择目录</string>
+    <string name="already_root_dir">已经是根目录</string>
+    <string name="prompt_choose_apk_dir">请授权读取 apk.1 文件目录，一般是 WeiXin 或 WeChat</string>
+    <string name="not_support_file">不支持的文件格式</string>
+</resources>
