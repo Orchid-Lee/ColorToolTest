@@ -1,10 +1,7 @@
 package com.codefish.colortool
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.codefish.colortool.databinding.ActivityMainBinding
 import com.highcapable.yukihookapi.YukiHookAPI
 import kotlinx.coroutines.CoroutineScope
@@ -17,8 +14,6 @@ open class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPref = this.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
-        val switchState = sharedPref.getBoolean("switch_state", false) // 获取开关状态，默认为 false
 
         setContentView(binding.root)
 
@@ -28,7 +23,7 @@ open class MainActivity : Activity() {
             binding.validStatus.text = "模块未激活"
         }
 
-        var isGiveRoot = 5
+        var isGiveRoot: Int
 
         try {
             val process = Runtime.getRuntime().exec("su -c cat /system/build.prop")

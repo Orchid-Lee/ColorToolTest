@@ -12,7 +12,7 @@ class appDetail: YukiBaseHooker() {
         //频繁安装检测
         var installationFrequencyMethodName = ""
         //风险检测
-        var attemptInstallationMethod = ""
+        val attemptInstallationMethod = ""
         var securityCheckMethod = ""
         DexKitBridge.create(this.appInfo.sourceDir).use {
             installationFrequencyMethodName = it.findMethod {
