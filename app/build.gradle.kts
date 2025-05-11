@@ -18,6 +18,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a")
+            isUniversalApk = true
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -37,6 +46,36 @@ android {
             "-Xno-receiver-assertions"
         )
     }
+
+    signingConfigs {
+        create("release") {
+            if (System.getenv("CI") != null) {
+                storeFile = file(System.getenv("TWICEYUAN_KEYSTORE"))
+                storePassword = System.getenv("TWICEYUAN_KEYSTORE_PASSWD")
+                keyAlias = System.getenv("TWICEYUAN_KEY_ALIAS")
+                keyPassword = System.getenv("TWICEYUAN_KEY_PASSWD")
+            } else {
+                val keystore = "/test/test/test/xxx/ANDROID_SIGN.jks"
+                storeFile = file(keystore ?: "/dev/null")
+                storePassword = "123456"
+                keyAlias = "ANDROID_SIGN"
+                keyPassword = "123456"
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // debug 构建类型的配置
+        }
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+
     buildFeatures {
         buildConfig = true
         viewBinding = true

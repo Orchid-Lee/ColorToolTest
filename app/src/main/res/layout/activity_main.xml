@@ -12,6 +12,7 @@
         style="@android:style/TextAppearance.DeviceDefault.Medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:paddingLeft="@dimen/padding_horizontal"
         android:paddingRight="@dimen/padding_horizontal"
         android:text="@string/usage_title" />
@@ -83,13 +84,15 @@
 
         </LinearLayout>
 
-        <Switch
-            android:id="@+id/switch_hide_icon"
+        <ImageButton
+            android:id="@+id/reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:paddingLeft="@dimen/padding_horizontal"
-            android:paddingRight="@dimen/padding_horizontal" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/icon_color_selector"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="20dp">
+        </ImageButton>
 
     </FrameLayout>
 
@@ -103,39 +106,5 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="4dp" />
-
-    <FrameLayout
-        android:id="@+id/remove_risk_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_horizontal"
-                android:paddingRight="@dimen/padding_horizontal"
-                android:text="@string/remove_risk_check" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-
-        </LinearLayout>
-
-        <Switch
-            android:id="@+id/remove_risk_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:paddingLeft="@dimen/padding_horizontal"
-            android:paddingRight="@dimen/padding_horizontal" />
-
-    </FrameLayout>
 
 </LinearLayout>

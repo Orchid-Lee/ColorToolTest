@@ -3,7 +3,7 @@ package com.codefish.colortool.hook
 import android.os.Build
 import android.os.Build.VERSION_CODES.VANILLA_ICE_CREAM
 import com.codefish.colortool.hook.android.corepatch.CorePatchForV
-import com.codefish.colortool.hook.appdetail.appdetail
+import com.codefish.colortool.hook.appdetail.appDetail
 import com.highcapable.yukihookapi.annotation.xposed.InjectYukiHookWithXposed
 import com.highcapable.yukihookapi.hook.factory.configs
 import com.highcapable.yukihookapi.hook.factory.encase
@@ -27,7 +27,7 @@ class HookEntry : IYukiHookXposedInit {
         // Your code here.
         System.loadLibrary("dexkit")
         loadApp(hooker = android())
-        loadApp(hooker = appdetail())
+        loadApp(hooker = appDetail())
     }
 
     override fun onXposedEvent() {

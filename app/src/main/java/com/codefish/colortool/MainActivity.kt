@@ -1,14 +1,15 @@
 package com.codefish.colortool
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.codefish.colortool.databinding.ActivityMainBinding
 import com.highcapable.yukihookapi.YukiHookAPI
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import kotlinx.coroutines.launch
 
 open class MainActivity : Activity() {
 
@@ -16,6 +17,9 @@ open class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPref = this.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+        val switchState = sharedPref.getBoolean("switch_state", false) // 获取开关状态，默认为 false
+
         setContentView(binding.root)
 
         if (YukiHookAPI.Status.isModuleActive){
@@ -24,29 +28,47 @@ open class MainActivity : Activity() {
             binding.validStatus.text = "模块未激活"
         }
 
-        val process = Runtime.getRuntime().exec("su -c cat /system/build.prop")
-        var isGiveRoot = process.waitFor()
-    }
-}
+        var isGiveRoot = 5
 
-suspend fun executeCommand(command: String): String {
-    return withContext(Dispatchers.IO) {
         try {
-            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
-            val reader = BufferedReader(InputStreamReader(process.inputStream))
-            val output = StringBuilder()
-            var line: String?
-
-            while (reader.readLine().also { line = it } != null) {
-                output.append(line).append("\n")
-            }
-
-            process.waitFor()
-            reader.close()
-            output.toString().trim()
+            val process = Runtime.getRuntime().exec("su -c cat /system/build.prop")
+            isGiveRoot = process.waitFor()
         } catch (e: Exception) {
-            Log.e("ColorTool", "executeCommand: $e")
-            return@withContext "0"
+            isGiveRoot = 3
+        }
+
+        if (isGiveRoot == 0){
+            binding.validStatus.text = "${binding.validStatus.text}, 模块已Root"
+        }else{
+            binding.validStatus.text = "模块未Root"
+        }
+
+        binding.apply {
+            reload.setOnClickListener{
+                restartApp("com.oplus.appdetail")
+                toast(R.string.reload_success)
+            }
+        }
+    }
+
+    private fun restartApp(packageName: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                if (packageName == "android") {
+                    val process = Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot"))
+                    process.waitFor()
+                } else {
+                    val command = "pkill -f " + packageName
+                    // 使用 su 执行命令
+                    val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
+
+                    // 等待命令执行完成
+                    process.waitFor()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // 处理错误
+            }
         }
     }
 }
