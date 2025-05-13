@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="@dimen/padding_vertical"
-    android:paddingBottom="@dimen/padding_vertical"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     tools:context="com.codefish.colortool.MainActivity">
 
     <TextView
@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:paddingLeft="@dimen/padding_horizontal"
-        android:paddingRight="@dimen/padding_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:text="@string/usage_title" />
 
     <Space
@@ -25,8 +25,8 @@
         style="@android:style/TextAppearance.DeviceDefault.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/padding_horizontal"
-        android:paddingRight="@dimen/padding_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:text="@string/usage_desc" />
 
     <View
@@ -45,8 +45,8 @@
         style="@android:style/TextAppearance.DeviceDefault.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/padding_horizontal"
-        android:paddingRight="@dimen/padding_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:text="模块未激活 请到LSPosed中激活此模块" />
 
     <View
@@ -74,8 +74,8 @@
                 style="@android:style/TextAppearance.DeviceDefault.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_horizontal"
-                android:paddingRight="@dimen/padding_horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="@string/hide_icon_title" />
 
             <Space
