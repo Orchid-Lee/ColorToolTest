@@ -4,6 +4,10 @@ import com.highcapable.yukihookapi.hook.entity.YukiBaseHooker
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
 import com.highcapable.yukihookapi.hook.type.java.UnitType
+import de.robv.android.xposed.XposedBridge
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Modifier
 
@@ -74,5 +78,7 @@ class appDetail: YukiBaseHooker() {
                 }
             }
         }
+
+        XposedBridge.log("ColorTool: 系统安装器重启成功...")
     }
 }

@@ -2,6 +2,7 @@ package com.codefish.colortool
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,8 +18,6 @@ open class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPref = this.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
-        val switchState = sharedPref.getBoolean("switch_state", false) // 获取开关状态，默认为 false
 
         setContentView(binding.root)
 
@@ -28,7 +27,7 @@ open class MainActivity : Activity() {
             binding.validStatus.text = "模块未激活"
         }
 
-        var isGiveRoot = 5
+        var isGiveRoot: Int
 
         try {
             val process = Runtime.getRuntime().exec("su -c cat /system/build.prop")
@@ -40,7 +39,7 @@ open class MainActivity : Activity() {
         if (isGiveRoot == 0){
             binding.validStatus.text = "${binding.validStatus.text}, 模块已Root"
         }else{
-            binding.validStatus.text = "模块未Root"
+            binding.validStatus.text = "${binding.validStatus.text}, 模块未Root"
         }
 
         binding.apply {
@@ -54,21 +53,17 @@ open class MainActivity : Activity() {
     private fun restartApp(packageName: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                if (packageName == "android") {
-                    val process = Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot"))
-                    process.waitFor()
-                } else {
-                    val command = "pkill -f " + packageName
-                    // 使用 su 执行命令
-                    val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
+                val command = "pkill -f " + packageName
+                // 使用 su 执行命令
+                val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
 
-                    // 等待命令执行完成
-                    process.waitFor()
-                }
+                // 等待命令执行完成
+                process.waitFor()
             } catch (e: Exception) {
                 e.printStackTrace()
                 // 处理错误
             }
         }
     }
+
 }
