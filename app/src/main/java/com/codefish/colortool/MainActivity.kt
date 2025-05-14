@@ -1,11 +1,7 @@
 package com.codefish.colortool
 
 import android.app.Activity
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.codefish.colortool.databinding.ActivityMainBinding
 import com.highcapable.yukihookapi.YukiHookAPI
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +49,7 @@ open class MainActivity : Activity() {
     private fun restartApp(packageName: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val command = "pkill -f " + packageName
+                val command = "pkill -f $packageName"
                 // 使用 su 执行命令
                 val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
 

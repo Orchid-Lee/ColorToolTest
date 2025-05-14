@@ -5,9 +5,6 @@ import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
 import com.highcapable.yukihookapi.hook.type.java.UnitType
 import de.robv.android.xposed.XposedBridge
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Modifier
 
@@ -16,7 +13,7 @@ class appDetail: YukiBaseHooker() {
         //频繁安装检测
         var installationFrequencyMethodName = ""
         //风险检测
-        var attemptInstallationMethod = ""
+        val attemptInstallationMethod = ""
         var securityCheckMethod = ""
         DexKitBridge.create(this.appInfo.sourceDir).use {
             installationFrequencyMethodName = it.findMethod {

@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     autowire(libs.plugins.android.application)
     autowire(libs.plugins.kotlin.android)
@@ -20,6 +18,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    androidResources {
+        localeFilters += "zh" // 使用逗号分隔的字符串
+    }
+
     splits {
         abi {
             isEnable = true
@@ -33,6 +35,7 @@ android {
         resources {
             excludes += "DebugProbesKt.bin"
             excludes += "kotlin-tooling-metadata.json"
+            excludes += "META-INF/*.kotlin_module"
         }
     }
 
